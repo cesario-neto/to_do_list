@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'core',
     'frontend',
     'task',
+    'account',
 ]
 
 MIDDLEWARE = [
