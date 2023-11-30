@@ -7,7 +7,7 @@ from django.contrib import messages
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect('index')
+        return redirect('home')
 
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -27,7 +27,7 @@ def register(request):
 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect('index')
+        return redirect('home')
 
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -38,7 +38,7 @@ def login_view(request):
             user = authenticate(email=form_email, password=form_password)
             if user:
                 login(request, user)
-                return redirect('index')
+                return redirect('home')
             else:
                 messages.error(request, 'Email e/ou senha invalido')
 
