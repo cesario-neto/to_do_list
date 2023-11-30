@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <form action="{% url "create_task" %}" method="post" id="taskForm">
+        {% csrf_token %}
+        {% for field in form %}
+            {% if field.label == 'Terminar em' %}
+                {{ field.label }}                
+                {{ field }}
+                <input type="date" id="date">
+                <input type="time" id="time">
+            {% else %}
+                {{ field.label }}
+                {{ field }}
+            {% endif %}
+            <br>
+            <br>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-submit">Criar</button>
+    </form>
+    <a href="{% url "home" %}">Voltar</a>
+{% endblock content %}
