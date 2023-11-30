@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    Home
+    
+    {% for task in tasks %}
+        <a href="">{{ task.title }}</a>
+        <br>
+    {% endfor %}
 {% endblock content %}
