@@ -1,13 +1,75 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <p><a href="{% url "create_task" %}">Criar tarefa</a></p>
-    {% for task in tasks %}
-        <a href="{% url "edit_task" task.id%}">{{ task.title }}</a>
-        <form action="{% url "delete_task" task.id %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Deletar</button>
-        </form>
-        <br>
-    {% endfor %}
+<div class="bg-secondary-subtle">
+
+    <div class="pt-2 pb-2"></div>
+
+    <div class="container bg-light mt-1 mb-1 border border-2 shadow">
+        <div class="row pt-2 pb-2">
+
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <form class="d-flex" role="search" method="get" action="">
+                        <input class="form-control me-2" type="search" placeholder="Buscar Tarefa..."
+                            aria-label="Search" name="search">
+                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
+                </div>
+
+                <div class="text-center pt-3">
+                    <a href="{% url "create_task" %}" class="btn btn-outline-primary">Criar Task</a>
+                </div>
+
+                {% for task in tasks %}
+                    <section class="col-12 col-lg-6 text-center mt-3 mb-3">
+                        <h2>{{ task.title }}</h2>
+                        <p>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#{{ task.slug }}">Sobre a tarefa</button>
+                        </p>
+                        <div class="collapse multi-collapse" id="{{ task.slug }}">
+                            <div class="card card-body">
+                                <h2>Resumo</h2>
+                                <p>{{ task.task_text }}</p>
+                                <h3>Criado em</h3>
+                                <p>{{ task.created_at }}</p>
+                                <h3>Terminar em</h3>
+                                <p>{{ task.end_in }}</p>
+
+                                <div class="row justify-content-evenly">
+                                    <div class="col-6">
+                                        <a href="{% url "edit_task" task.id %}" class="btn btn-primary">Editar</a>
+                                    </div>
+                                    <form action="{% url "delete_task" task.id %}" method="post" class="col-6">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">Deletar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                {% endfor %}
+
+                <nav class="text-center">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+    <div class="pt-2 pb-2"></div>
+    
 {% endblock content %}

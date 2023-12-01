@@ -1,23 +1,55 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <form action="{% url "create_task" %}" method="post" id="taskForm">
-        {% csrf_token %}
-        {% for field in form %}
-            {% if field.label == 'Terminar em' %}
-                {{ field.label }}                
-                {{ field }}
-                <input type="date" id="date">
-                <input type="time" id="time">
-            {% else %}
-                {{ field.label }}
-                {{ field }}
-            {% endif %}
-            <br>
-            <br>
-        {% endfor %}
+<div class="bg-secondary-subtle">
 
-        <button type="submit" class="btn btn-submit">Criar</button>
-    </form>
-    <a href="{% url "home" %}">Voltar</a>
+        <div class="pt-2 pb-2"></div>
+
+        <div class="container bg-light mt-1 mb-1 border border-2 shadow">
+            <div class="row pt-2 pb-2">
+                <div class="container">
+                    <form action="{% url "create_task" %}" method="post">
+                        {% csrf_token %}
+
+                        <div class="pt-2 pb-2"></div>
+
+                        <div class="container">
+                            {{ form.title }}
+                        </div>
+
+                        <div class="pt-2 pb-2"></div>
+
+                        <div class="container">
+                            {{ form.task_text }}
+                        </div>
+
+                        <div class="pt-2 pb-2"></div>
+
+                        <div class="container text-center">
+                            <p>{{ form.end_in.label }}:</p>
+                            {{ form.end_in }}
+                            <input type="date" id="date" class="d-inline me-2">
+                            <input type="time" id="time" class="d-inline ms-2'">
+                        </div>
+
+                        <div class="pt-2 pb-2"></div>
+
+                        <div class="container">
+                            {{ form.status }}
+                        </div>
+
+                        <div class="pt-2 pb-2"></div>
+
+                        <div class="container text-center">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+
+                        <div class="pt-2 pb-2"></div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="pt-2 pb-2"></div>
+
 {% endblock content %}
