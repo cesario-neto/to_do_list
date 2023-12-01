@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from task.models import Task
 from task.forms import TaskForm
 from django.http import Http404
+from django.views.decorators.http import require_POST
 
 
 def index(request):
@@ -15,7 +16,6 @@ def index(request):
 def home(request):
     user = request.user
     tasks = Task.objects.filter(user=user)
-    print(tasks)
 
     context = {
         'tasks': tasks
@@ -66,3 +66,19 @@ def edit_task(request, task_id):
         'task': task
     }
     return render(request, 'task/pages/edit_task.html', context)
+
+
+@login_required(login_url='/login/')
+@require_POST
+def delete_task(request, task_id):
+    try:
+        task = Task.objects.get(pk=task_id)
+    except Task.DoesNotExist:
+        return Http404()
+
+    if not task.user == request.user:
+        raise Http404()
+
+    task.delete()
+
+    return redirect('index')
