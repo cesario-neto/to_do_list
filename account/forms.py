@@ -5,22 +5,49 @@ from django.core.exceptions import ValidationError
 
 
 class RegisterForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password1'].widget.attrs.update({
+            'class': 'form-control rounded-5',
+            'placeholder': 'Senha'})
+        self.fields['password2'].widget.attrs.update({
+            'class': 'form-control rounded-5',
+            'placeholder': 'Repita a senha'})
+
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username',
-                  'email', 'password1', 'password2']
+        fields = [
+            'email',
+            'username',
+            'password1',
+            'password2',
+        ]
+        widgets = {
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control rounded-5',
+                'placeholder': 'Email',
+            }),
+            'username': forms.TextInput(attrs={
+                'class': 'form-control rounded-5',
+                'placeholder': 'Nome de Usuário',
+            }),
+        }
 
 
 class LoginForm(forms.Form):
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={
             'required': True,
+            'class': 'form-control rounded-5',
+            'placeholder': 'Email',
         })
     )
 
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'required': True
+            'required': True,
+            'class': 'form-control rounded-5',
+            'placeholder': 'Senha',
         })
     )
 

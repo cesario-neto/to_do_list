@@ -28,8 +28,12 @@ class Task(BaseModel):
     task_text = models.TextField(
         verbose_name='Tarefa', blank=False, null=False)
     end_in = models.DateTimeField(verbose_name='Terminar em')
-    status = models.CharField(verbose_name='Status',
-                              choices=choices, max_length=100)
+    status = models.CharField(
+        verbose_name='Status',
+        choices=choices, max_length=100,
+        blank=False,
+        null=False, default=p
+    )
     slug = models.SlugField(verbose_name='Slug')
 
     def save(self, *args, **kwargs):
