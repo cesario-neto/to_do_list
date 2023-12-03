@@ -8,7 +8,7 @@
         <div class="container bg-light mt-1 mb-1 border border-2 shadow">
             <div class="row pt-2 pb-2">
                 <div class="container">
-                    <form action="{% url "create_task" %}" method="post">
+                    <form action="{% url "create_task" %}" method="post" id="taskForm">
                         {% csrf_token %}
 
                         <div class="pt-2 pb-2"></div>
