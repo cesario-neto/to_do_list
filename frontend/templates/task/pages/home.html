@@ -43,7 +43,7 @@
 
                                 <div class="row justify-content-evenly">
                                     <div class="col-6">
-                                        <a href="{% url "edit_task" task.id %}" class="btn btn-primary">Editar</a>
+                                        <a href="{% url "edit_task" task.slug %}" class="btn btn-primary">Editar</a>
                                     </div>
                                     <form action="{% url "delete_task" task.id %}" method="post" class="col-6">
                                         {% csrf_token %}

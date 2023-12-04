@@ -70,9 +70,9 @@ def create_task(request):
 
 
 @login_required(login_url='/login/')
-def edit_task(request, task_id):
+def edit_task(request, slug):
     try:
-        task = Task.objects.select_related('user').get(pk=task_id)
+        task = Task.objects.select_related('user').get(slug=slug)
     except Task.DoesNotExist:
         raise Http404()
 
