@@ -1,13 +1,14 @@
-<header class="w-100 pt-4 pb-4">
-    <div class="container">
-        <h1 class="text-center text-light"><a href="{% url "home" %}" class="link-light link-underline-opacity-0">To Do
-                List</a>
-        </h1>
-    </div>
+{% if site_setup.header %}
+    <header class="w-100 pt-4 pb-4">
+        <div class="container">
+            <h1 class="text-center text-light"><a href="{% url "home" %}" class="link-light link-underline-opacity-0">{{ site_setup.header_title}}</a>
+            </h1>
+        </div>
 
-    <div class="pt-2 pb-2"></div>
+        <div class="pt-2 pb-2"></div>
 
-    <div class="text-center">
-        <a href="{% url "logout_view" %}" class="btn btn-danger">Sair</a>
-    </div>
-</header>
+        <div class="text-center">
+            <a href="{% url "logout_view" %}" class="btn btn-danger">Sair</a>
+        </div>
+    </header>
+{% endif %}

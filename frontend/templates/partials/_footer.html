@@ -1,5 +1,7 @@
-<footer class="w-100 text-light text-center bg-primary">
-    <div class="pt-4 pb-2">
-        <p>Seu texto aqui</p>
-    </div>
-</footer>
+{% if site_setup.footer %}
+    <footer class="w-100 text-light text-center bg-primary">
+        <div class="pt-4 pb-2">
+            <p>{{ site_setup.footer_text }}</p>
+        </div>
+    </footer>
+{% endif %}
