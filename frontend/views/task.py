@@ -7,12 +7,6 @@ from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage
 
 
-def index(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-    return render(request, 'index.html')
-
-
 @login_required(login_url='/login/')
 def home(request):
     user = request.user
