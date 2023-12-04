@@ -22,12 +22,14 @@ if __name__ == '__main__':
     fake.add_provider(lorem)
 
     user = User.objects.all().first()
+    date = datetime.today()
+    date_now = f'{date.year}-{date.month}-{date.day} {date.hour}:{date.minute}'
 
     for i in range(0, OBJECTS_NUMBER):
         Task.objects.create(
             user=user,
             title=fake.text(max_nb_chars=20),
             task_text=fake.text(max_nb_chars=200),
-            end_in=datetime.now(),
+            end_in=date_now,
             status='pendente',
         )
