@@ -12,7 +12,7 @@
                 <div class="col-12">
                     <form class="d-flex" role="search" method="get" action="{% url "search" %}">
                         <input class="form-control me-2" type="search" placeholder="Buscar Tarefa..."
-                            aria-label="Search" name="search">
+                            aria-label="Search" name="search" value="{{ query }}">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
                     </form>
                 </div>
@@ -23,11 +23,7 @@
 
                 {% for task in page_obj %}
                     <section class="col-12 col-lg-6 text-center mt-3 mb-3">
-                        {% if task.status == 'finalizado' %}
-                            <h2 class="text-success">{{ task.title }}</h2>
-                        {% else %}
-                            <h2 class="text-danger">{{ task.title }}</h2>
-                        {% endif %}
+                        <h2>{{ task.title }}</h2>
                         <p>
                             <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#{{ task.slug }}">Sobre a tarefa</button>
@@ -59,7 +55,7 @@
                     <ul class="pagination justify-content-center">
                         <li class="page-item">
                             {% if page_obj.has_previous %}
-                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                <a class="page-link" href="?search={{ query }}&page={{ page_obj.previous_page_number }}" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             {% else %}
@@ -71,7 +67,7 @@
                         <li class="page-item"><a class="page-link disabled" href="#">{{ page_obj.number }}</a></li>
                         <li class="page-item">
                             {% if page_obj.has_next %}
-                                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                <a class="page-link" href="?search={{ query }}&page={{ page_obj.next_page_number }}" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             {% else %}

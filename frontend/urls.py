@@ -12,6 +12,7 @@ urlpatterns = [
 
     # task CRUD
     path('home/', views.home, name='home'),
+    path('search/', views.search, name='search'),
     path('create_task/', views.create_task, name='create_task'),
     path('edit_task/<task_id>/', views.edit_task, name='edit_task'),
     path('delete_task/<task_id>/', views.delete_task, name='delete_task'),

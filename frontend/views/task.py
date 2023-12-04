@@ -4,7 +4,7 @@ from task.models import Task
 from task.forms import TaskForm
 from django.http import Http404
 from django.views.decorators.http import require_POST
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage
 
 
 def index(request):
@@ -16,7 +16,8 @@ def index(request):
 @login_required(login_url='/login/')
 def home(request):
     user = request.user
-    tasks = Task.objects.filter(user=user)
+    tasks = Task.objects.filter(user=user).order_by(
+        'end_in').order_by('-status')
     paginator = Paginator(tasks, 8)
 
     page_number = request.GET.get('page')
@@ -27,6 +28,31 @@ def home(request):
     }
 
     return render(request, 'task/pages/home.html', context)
+
+
+@login_required(login_url='/login/')
+def search(request):
+    query = request.GET.get('search', '')
+    page_obj = []
+
+    if query:
+        tasks = Task.objects.filter(title__icontains=query).order_by(
+            'end_in').order_by('-status')
+
+        paginator = Paginator(tasks, 8)
+        page_number = request.GET.get('page')
+    try:
+        page_obj = paginator.get_page(page_number)
+    except EmptyPage:
+        page_obj = paginator.get_page(paginator.num_pages)
+
+    context = {
+        'tasks': tasks,
+        'page_obj': page_obj,
+        'query': query,
+    }
+
+    return render(request, 'task/pages/search.html', context)
 
 
 @login_required(login_url='/login/')
