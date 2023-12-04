@@ -4,6 +4,7 @@ from task.models import Task
 from task.forms import TaskForm
 from django.http import Http404
 from django.views.decorators.http import require_POST
+from django.core.paginator import Paginator
 
 
 def index(request):
@@ -16,9 +17,13 @@ def index(request):
 def home(request):
     user = request.user
     tasks = Task.objects.filter(user=user)
+    paginator = Paginator(tasks, 8)
 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
-        'tasks': tasks
+        'tasks': tasks,
+        'page_obj': page_obj,
     }
 
     return render(request, 'task/pages/home.html', context)
