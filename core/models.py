@@ -18,3 +18,16 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class SiteSetup(BaseModel):
+    class Meta:
+        verbose_name = 'Configuração do site'
+        verbose_name_plural = 'Configurações do site'
+
+    header = models.BooleanField(verbose_name='Cabeçalho', default=True)
+    header_title = models.CharField(
+        verbose_name='Titulo do cabeçalho', max_length=60)
+    footer = models.BooleanField(verbose_name='Rodapé', default=True)
+    footer_text = models.CharField(
+        verbose_name='Texto do rodapé', max_length=60)
