@@ -2,6 +2,8 @@ from django.db import models
 from core.models import BaseModel
 from django.utils.text import slugify
 from account.models import User
+import string as s
+import random
 
 
 class Task(BaseModel):
@@ -37,8 +39,12 @@ class Task(BaseModel):
     slug = models.SlugField(verbose_name='Slug')
 
     def save(self, *args, **kwargs):
+        characters = list(s.ascii_letters)
+        random.shuffle(characters)
+        random_characters = ''.join(
+            value for i, value in enumerate(characters) if i < 4)
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = f'{slugify(self.title)}{random_characters}'
 
         return super().save(*args, **kwargs)
 
