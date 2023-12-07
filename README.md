@@ -7,7 +7,7 @@ Ele possui um modelo registrado no admin para mudar o texto do header e footer e
 ## Como usar o projeto
 - Clonando repositorio
 ```
-git clone https://github.com/cesario-neto/order_manager.git
+git clone https://github.com/cesario-neto/to_do_list.git
 ```
 
 - Para **Windows**:
