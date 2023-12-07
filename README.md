@@ -12,7 +12,7 @@ git clone https://github.com/cesario-neto/to_do_list.git
 
 - Para **Windows**:
 ```
-cd order_manager
+cd to_do_list
 python -m venv venv
 venv\Scripts\activate.bat
 pip install -r requirements.txt
@@ -21,7 +21,7 @@ python manage.py migrate
 
 - Para **Linux**:
 ```
-cd order_manager
+cd to_do_list
 python -m venv venv
 . venv/bin/activate
 pip install -r requirements.txt
